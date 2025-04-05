@@ -1,17 +1,8 @@
-# Base image
-FROM python:3.9
-
-# Set the working directory in the container
+FROM python:3.9-slim
 WORKDIR /app
-
-# Copy the current directory contents into the container
+COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 COPY . /app
-
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose port 8000 for Gunicorn
 EXPOSE 8000
-
-# Command to run the application using Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "wsgi:app"]
+CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:8000", "--timeout", "30", "wsgi:app"]
