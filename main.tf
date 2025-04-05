@@ -16,7 +16,7 @@ provider "aws" {
        apt install -y docker.io
        apt install -y docker-compose
        cd /home/ubuntu
-       git clone https://github.com/kullanici/arac-kiralama.git
+       git clone https://github.com/gaukharshegirova/arac-kiralama.git
        cd arac-kiralama
        docker-compose up -d
      EOF
